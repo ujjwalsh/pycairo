@@ -32,24 +32,36 @@ matrix:
       env: ARCH="x86" CAIRO_VERSION="1.17.2" PYTHON_PACKAGE="pythonx86" PYTHON_VERSION="3.8.3" 
     - os: linux
       dist: trusty
+      arch:
+        - ppc64le
+        - amd64
       language: python
       python: 3.5
       name: Build on Python 3.5 in Trusty Linux
       env: CFLAGS="-Werror -coverage"
     - os: linux
       dist: trusty
+      arch:
+        - ppc64le
+        - amd64
       language: python
       python: 3.6
       name: Build on Python 3.6 in Trusty Linux
       env: CFLAGS="-Werror -coverage"
     - os: linux
       dist: xenial
+      arch:
+        - ppc64le
+        - amd64
       language: python
       python: 3.7
       name: Build on Python 3.7 in Xenial Linux
       env: CFLAGS="-Werror -coverage"
     - os: linux
       dist: xenial
+      arch:
+        - ppc64le
+        - amd64
       language: python
       python: 3.8
       name: Build on Python 3.8 in Xenial Linux
@@ -60,7 +72,8 @@ matrix:
       name: Build on Python 3.8 in Mac OSX xcode11.3
       env: CFLAGS="-Werror -coverage"
 
-
+before_install:
+  - sudo chown -Rvf $USER:$GROUP ~/.cache/pip/wheels
 install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then travis_retry sudo apt-get update -q; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then travis_retry sudo apt-get install -y libcairo2-dev; fi
